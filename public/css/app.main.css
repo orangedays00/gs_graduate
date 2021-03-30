@@ -1,0 +1,22 @@
+
+.home-background {
+  background: #00A7EA;
+  width:100vw;
+  height: 100vh;
+}
+
+.home-background-img {
+      height: 100vh;
+    }
+    
+.ori-flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+
+@media screen and (max-width: 480px){
+    .home-background-img {
+      width:100vw;
+    }
+}
