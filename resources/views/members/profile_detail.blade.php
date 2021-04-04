@@ -29,9 +29,27 @@
                 'member' => $member
             ])
             
-            
+            <div class="row mt-3">
+                <div class="col-12">
+                    @if (!empty($post))
+                        <div class="badge rounded-pill bg-success text-white p-2">
+                        投稿数：{{ $post }}
+                        </div>
+                    @endif
+                    @if (!empty($comment))
+                        <div class="badge rounded-pill bg-success text-white p-2">
+                            コメント投稿数：{{ $comment }}
+                        </div>
+                    @endif
+                    @if (!empty($review_count))
+                        <div class="badge rounded-pill bg-success text-white p-2">
+                            メンバーレビュー数：{{ $review_count }}
+                        </div>
+                    @endif
+                </div>
+            </div>
 
-            <div class="card mt-5">
+            <div class="card mt-3">
                 <div class="card-header">プロフィール</div>
                 <div class="col">
                     <dl class="row mt-2">

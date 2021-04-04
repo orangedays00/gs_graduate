@@ -1,22 +1,61 @@
 
 .home-background {
-  background: #00A7EA;
+  /*background: #00A7EA;*/
   width:100vw;
   height: 100vh;
 }
 
 .home-background-img {
-      height: 100vh;
-    }
+    object-fit: cover;
+}
     
 .ori-flex-column {
     display: flex;
     flex-direction: column;
 }
 
+.app-pc-header {
+        display: block;
+    }
+    
+.app-sp-header {
+    display: none;
+}
 
 @media screen and (max-width: 480px){
+    
     .home-background-img {
       width:100vw;
+      
+    }
+    
+    .app-pc-header {
+        display: none;
+    }
+    
+    .app-sp-header {
+        display: block;
     }
 }
+
+
+/*@media screen and (max-width: 480px){*/
+/*    .img-pc {*/
+/*        display: none;*/
+/*    } */
+    
+/*    .home-background-img {*/
+/*      width:100vw;*/
+/*    }*/
+/*}*/
+
+/*@media screen and (min-width: 481px){*/
+/*    .img-sp {*/
+/*        display: none;*/
+/*    }*/
+    
+/*    .home-background-img {*/
+/*      height: 100vh;*/
+      /*width: 100vw;*/
+/*    }*/
+/*}*/

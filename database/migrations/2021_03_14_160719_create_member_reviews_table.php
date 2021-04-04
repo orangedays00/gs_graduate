@@ -20,8 +20,8 @@ class CreateMemberReviewsTable extends Migration
             $table->text('review')->comment('レビュー');
             $table->timestamps();
     
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('reviewer_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('reviewer_id')->references('id')->on('users')->onDelete('cascade');
             // $table->unique(['user_id', 'reviewer_id']);
         });
     }

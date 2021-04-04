@@ -20,16 +20,15 @@
                         <th>更新日</th>
                         <th></th>
                     </tr>
-                    @foreach ($items as $item)
+                    @foreach ($users as $user)
                         <tr>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->created_at->format('Y_m_d') }}</td>
-                            <td>{{ $item->updated_at->format('Y_m_d') }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->created_at->format('Y_m_d') }}</td>
+                            <td>{{ $user->updated_at->format('Y_m_d') }}</td>
                             <td>
-                                @if($role <= ($item->role))
-                                <form action="/users/{{$item->id}}" method='post'>
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
+                                @if($role <= ($user->role))
+                                <form action="{{ route('admin.delete', [$user->id]) }}" method='POST'>
+                                    @csrf
                                     <button type="submit" class="btn btn-warning">削除</button>
                                 </form>
                                 @endif

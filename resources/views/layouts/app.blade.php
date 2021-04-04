@@ -46,7 +46,7 @@
                            </li>
                        @else
                            {{-- ログイン済み --}}
-                           <li class="nav-item dropdown ml-2">
+                           <li class="nav-item dropdown ml-2 app-pc-header">
                                {{-- ログイン情報 --}}
                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                    @if (!empty(Auth::user()->avatar_file_name))
@@ -81,6 +81,45 @@
                                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                          @csrf
                                      </form>
+                                 </div>
+                           </li>
+                           <li class="nav-item dropdown ml-2 app-sp-header">
+                               {{-- ログイン情報 --}}
+                               <a id="navbarDropdown" class="nav-link text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                   @if (!empty(Auth::user()->avatar_file_name))
+                                       <img src="/storage/avatars/{{Auth::user()->avatar_file_name}}" class="rounded-circle" style="object-fit: cover; width: 35px; height: 35px;">
+                                   @else
+                                       <img src="/images/avatar_default.png" class="rounded-circle" style="object-fit: cover; width: 35px; height: 35px;">
+                                   @endif
+                                   {{ Auth::user()->name }}さん こんにちは
+                               </a>
+                               {{-- ドロップダウンメニュー --}}
+                               <div class="card">
+                                 <div class="card-body">
+                                     @if(Auth::user()->role == 2)
+                                     <a class="dropdown-item" href="{{ route('admin') }}">
+                                         <i class="far fa-address-card text-left" style="width: 30px"></i>{{ __('Admin') }}
+                                     </a>
+                                     @endif
+                                     <a class="dropdown-item" href="{{ route('posts.index') }}">
+                                         <i class="far fa-comment-alt text-left" style="width: 30px"></i>{{ __('Post') }}
+                                     </a>
+                                     <a class="dropdown-item" href="{{ route('mypage.edit-profile') }}">
+                                         <i class="far fa-address-card text-left" style="width: 30px"></i>{{ __('Profile edit') }}
+                                     </a>
+                                     <a class="dropdown-item" href="{{ route('password.form') }}">
+                                       <i class="fas fa-unlock-alt text-left" style="width: 30px"></i>{{ __('Change Password') }}
+                                     </a>
+                                     <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                          document.getElementById('logout-form').submit();">
+                                         <i class="fas fa-sign-out-alt text-left" style="width: 30px"></i>ログアウト
+                                     </a>
+         
+                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                         @csrf
+                                     </form>
+                                 </div>
                                  </div>
                            </li>
                        @endguest

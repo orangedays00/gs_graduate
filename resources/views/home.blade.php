@@ -8,10 +8,7 @@
 <div class="home-background">
     <div class="container">
         <div class="row justify-content-center">
-                    
-    
-                    <img src="../images/gb_home_copy.png" class="home-background-img"/>
-
+            <img src="../images/ac_top_01_titled.png" class="home-background-img"/>
         </div>
     </div>
 </div>

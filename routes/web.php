@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth', 'can:admin']], function () {
 });
 
 Route::get('/admin', 'UserController@index')->name('admin')->middleware('auth');
+Route::post('/admin/{id}', 'UserController@destroy')->name('admin.delete')->middleware('auth');
 
 /*
 |-------------------------------------------------------------------------

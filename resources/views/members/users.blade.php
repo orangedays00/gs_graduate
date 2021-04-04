@@ -11,8 +11,8 @@
             {{ session('status') }}
         </div>
     @endif
-    <div class="mt-3">
-        <form class="col-sm-10" method="GET" action="{{ route('top') }}">
+    <div class="mt-3 col-10 offset-1 col-md-8 offset-md-2 col-lg-10 offset-lg-1">
+        <form method="GET" action="{{ route('top') }}">
              <div class="input-group">
                  <input type="text" name="keyword" class="form-control" placeholder="キーワード検索">
                  <div class="input-group-append">
@@ -29,7 +29,7 @@
     <!--</form>-->
     <div class="row mt-5">
         @foreach ($users as $user)
-            <div class="col-5 mb-3 mx-2 col-sm-4 col-md-2" style="width: 10rem;">
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
                 <div class="card h-100">
                     <div class="position-relative overflow-hidden">
                         @if (!empty($user->avatar_file_name))

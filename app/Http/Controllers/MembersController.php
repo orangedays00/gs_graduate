@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Member; //この行を上に追加
 use App\User;//この行を上に追加
+use App\Post;
+use App\Comment;
 use App\MemberReview;
 use Auth;//この行を上に追加
 use Validator;//この行を上に追加
@@ -85,12 +87,18 @@ class MembersController extends Controller
         $user = User::find($profile_id);
         $member = Member::where('user_id',$profile_id)->first();
         $reviews = MemberReview::join('users','member_reviews.reviewer_id', '=', 'users.id')->where('member_reviews.user_id',$profile_id)->orderBy('member_reviews.created_at','desc')->get();
+        $post_count = Post::where('posts.user_id',$profile_id)->count();
+        $comment_count = Comment::where('comments.user_id',$profile_id)->count();
+        $review_count = MemberReview::where('member_reviews.reviewer_id', $profile_id)->count();
         // $reviews = MemberReview::where('user_id',$profile_id)->orderBy('created_at','desc')->get();
         // dd($reviews->ToArray());
         return view('members.profile_detail',[
             'user' => $user,
             'member'=> $member,
             'reviews' => $reviews,
+            'post' => $post_count,
+            'comment' => $comment_count,
+            'review_count' => $review_count,
             ]);
     }
     

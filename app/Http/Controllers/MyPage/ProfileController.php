@@ -49,6 +49,7 @@ class ProfileController extends Controller
          $member->selected_mentor = $request->input('selected_mentor');
          $member->submission_assignments = $request->input('submission_assignments');
          $member->graduation_project_url = $request->input('graduation_project_url');
+        //  $member->graduation_project_proposal = $request->input('graduation_project_proposal');
          $member->stressed_gs = $request->input('stressed_gs');
          
          if ($request->has('avatar')) {
@@ -56,8 +57,19 @@ class ProfileController extends Controller
              $member->avatar_file_name = $fileName;
          }
          
+        //  $file_name = $request->file('graduation_project_proposal')->getClientOriginalName();
+        // $path = Storage::disk('public')->putFile('images', $request->file('image'));
         if($request->has('graduation_project_proposal')){
+            // $file_name = Storage::disk('public')->putFile('pdf', $request->file('graduation_project_proposal'));
+            
+            // 以下は正解（ただし、pdfが保存名に表示される
             $file_name = Storage::disk('public')->putFileAs('pdf', $request->file('graduation_project_proposal'), $request->file('graduation_project_proposal')->getClientOriginalName());
+            // dd($file_name);
+            
+        //  $file_name = Storage::disk('public')
+            //  ->putFile('pdf', new File($request->file('graduation_project_proposal')->getClientOriginalName()));
+        //  $member->graduation_project_proposal = file('graduation_project_proposal')->storeAs('pdf',$file_name);
+        
             $member->graduation_project_proposal = basename($file_name);
         }
         

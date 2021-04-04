@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\Comment;
 use App\User;
+use App\Member;
+use App\Post;
+
+use App\MemberReview;
 
 class UserController extends Controller
 {
@@ -22,25 +27,25 @@ class UserController extends Controller
         $id = Auth::user()->id;
         if($role === 1) //メンテナンス用権限
             {
-            $items = User::all();
+            $users = User::all();
             $delete_flag = 1;
             }
         elseif(($role > 1)&&($role <= 5)) //管理者権限
             {
-            $items = User::where('role' ,'>=',2)->get();
+            $users = User::where('role' ,'>=',2)->get();
             $delete_flag = 1;
             }
         elseif(($role > 5)&&($role <= 8)) //一般ユーザー権限
             {
-            $items = User::where('role','>=',2)->get();
+            $users = User::where('role','>=',2)->get();
             $delete_flag = 0;
             }
         else //外注権限
             {
-            $items = User::where('id','=',$id)->get();
+            $users = User::where('id','=',$id)->get();
             $delete_flag = 0;
             }
-        return view('members.admin', compact('items','delete_flag','role'));
+        return view('members.admin', compact('users','delete_flag','role'));
     }
 
     /**
@@ -106,6 +111,22 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        
+        \DB::transaction(function() use ($user){
+            
+            
+            $user->comment()->delete();
+            $user->posts()->delete();
+            $user->reviews()->delete();
+            $user->member()->delete();
+            $user->delete();
+        });
+        // $user = User::findOrFail($id);
+        // $user->delete();
+        // $member = Member::findOrFail($id);
+        // $member->delete();
+        
+        return redirect()->route('admin');
     }
 }
